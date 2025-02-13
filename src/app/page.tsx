@@ -1,31 +1,17 @@
-'use client';
-import { useState } from "react";
-import {login, logout} from "../../lib/firebase.js";
-
+import AudioUpload from "@/app/components/AudioUpload";
 
 export default function Home() {
-  const [user, setUser] = useState(null);
-
-  const handleLogin = async () => {
-    const userData = await login();
-    setUser(userData);
-  };
-
-  return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <h1 className="text-3xl font-bold">AI Meeting Note Taker</h1>
-        {user ? (
-            <div className="mt-4">
-              <p>Welcome, {user.displayName}!</p>
-              <button onClick={logout} className="mt-2 px-4 py-2 bg-red-500 text-white rounded">
-                Logout
-              </button>
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+            <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-xl">
+                <h1 className="text-3xl font-bold text-center text-gray-800">Upload & Transcribe Audio</h1>
+                <p className="text-gray-600 text-center mt-2">
+                    Upload your meeting recordings and get transcriptions instantly!
+                </p>
+                <div className="mt-6">
+                    <AudioUpload />
+                </div>
             </div>
-        ) : (
-            <button onClick={handleLogin} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-              Sign in with Google
-            </button>
-        )}
-      </div>
-  );
+        </div>
+    );
 }
